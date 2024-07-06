@@ -1,0 +1,24 @@
+Propósito del proyecto
+Diseniar una web para venta de accesorios para teléfono
+
+
+estructura y vistas
+*Pantalla bienvenida / HomeN
+Pantalla que diga bienvenido a Chriss Store etc
+
+*Vista de productos / AllProductsView
+Pantalla principal de Store
+
+*vista del producto seleccionado / 
+
+*Tarjeta propucto / ProductCardN
+Borde animado al pasar el mouse 
+
+*Carrito de compras / Listado carrito
+mostrar lista de productos seleccionados y
+boton para restar, sumar y eliminar del carrito
+
+
+Login y registro / LorginN
+Campos para llegar usuario, mail, contrasenia
+
