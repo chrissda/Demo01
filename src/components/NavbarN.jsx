@@ -51,7 +51,7 @@ const NavbarN = () => {
 						</div>
 						<button className="block sm:hidden" onClick={menuBtnNav}>
 							{/* {BOpen ? <X className="size-8" /> : <Menu className="size-8" />} */}
-							{BOpen ? <i class="fa-solid fa-x text-2xl pl-1"></i> : <i class="fa-solid fa-bars text-2xl"></i>}
+							{BOpen ? <i className="fa-solid fa-x text-2xl pl-1"></i> : <i className="fa-solid fa-bars text-2xl"></i>}
 						</button>
 					</div>
 					{/* renderizado CS */}
