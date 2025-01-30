@@ -14,6 +14,7 @@ export const searchProduct = async (req, res) => {
         message: "El producto no se encuentra o no existe en la BD."
       });
     }
+    // Encuentro el producto y lo muestro
     return res.json({
       message: "Producto encontrado.",
       content: prodFinded,
