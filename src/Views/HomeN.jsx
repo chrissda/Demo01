@@ -8,7 +8,7 @@ const HomeN = () => {
         Bienvenido a Chriss Store
       </div>
       <NavLink 
-        className="bg-orange-600 text-white"
+        className="bg-indigo-600 text-white"
         to="/"
       >
         Ir al store

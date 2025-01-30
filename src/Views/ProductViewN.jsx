@@ -3,7 +3,7 @@ import useAxios from "../hooks/useAxios";
 import { Link } from "react-router-dom";
 import convertDateToLocal from "../utils/parseDate";
 import React from "react";
-import NavbarN from "../components/NavbarN";
+// import NavbarN from "../components/NavbarN";
 
 const ProductViewN = () => {
   const { id } = useParams();

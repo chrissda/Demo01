@@ -38,10 +38,14 @@ const NavbarN = () => {
 							<i className="fa-solid fa-cart-shopping"></i>
 						</Link>
 						<div className="flex gap-0.5">
-							<NavLink className="px-5 py-1 bg-indigo-700 hover:outline hover:outline-2 hover:outline-sky-500 rounded-l-xl ease-in duration-300" 
-								to="/login">Login</NavLink>
-							<NavLink className="px-4 py-1 bg-indigo-700 hover:outline hover:outline-2 hover:outline-sky-500 rounded-r-xl ease-in duration-300" 
-								to="/login">Register</NavLink>
+							<div>
+								<NavLink className="px-5 py-1 bg-indigo-700 hover:outline hover:outline-2 hover:outline-sky-500 rounded-l-xl ease-in duration-300" 
+									to="/login">Login</NavLink>
+							</div>
+							<div>
+								<NavLink className="px-4 py-1 bg-indigo-700 hover:outline hover:outline-2 hover:outline-sky-500 rounded-r-xl ease-in duration-300" 
+									to="/register">Register</NavLink>
+							</div>
 						</div>
 					</div>
 					{/* renderizado boton barras/menu, boton X y Login */}
@@ -66,7 +70,7 @@ const NavbarN = () => {
 							<div className="hover:bg-sky-400 rounded-md py-2 ease-in duration-200"><NavLink className="w-full" to="/">Inicio</NavLink></div>
 							<div className="hover:bg-sky-400 rounded-md py-2 ease-in duration-200"><NavLink className="w-full" to="/">Productos</NavLink></div>
 							<div className="hover:bg-sky-400 rounded-md py-2 ease-in duration-200"><NavLink className="w-full" to="/contact">Contacto</NavLink></div>
-							<div className="hover:bg-sky-400 rounded-md py-2 ease-in duration-200"><NavLink className="w-full" to="/">Registrarse</NavLink></div>
+							<div className="hover:bg-sky-400 rounded-md py-2 ease-in duration-200"><NavLink className="w-full" to="/register">Registrarse</NavLink></div>
 						</div>
 					</div>
 				)}
