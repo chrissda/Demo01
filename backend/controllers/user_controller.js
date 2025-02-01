@@ -1,4 +1,7 @@
-import { regUserSerializer, loginUserSerializer, updateUserSerializer } from './serializers/user_serializer.js';
+import {
+  regUserSerializer,
+  loginUserSerializer,
+  updateUserSerializer } from './serializers/user_serializer.js';
 import { genSalt, hash, compare } from 'bcrypt';
 import { connection } from '../connection.js';
 import JWT from "jsonwebtoken";
@@ -25,10 +28,41 @@ export const regUser = async (req, res) => {
       typeUser: true,
     },
   });
-
   return res.json({
     message: 'Usuario registrado exitosamente',
     data: newUser,
+  });
+};
+
+export const regUserClient = async (req, res) => { // Para solo registrar CLIENTE
+  console.log("Datos recibidos:", req.body);
+  const data = req.body;
+  const dataUser = regUserSerializer.parse({
+    ...data,
+    typeUser: "CLIENTE", // Forzar que ingrese como CLIENTE
+  });
+  console.log(dataUser)
+  const salt = await genSalt();
+  const password = await hash(dataUser.password, salt);
+  const newClient = await connection.usuario.create({
+    data: {
+      nombre: dataUser.nombre,
+      apellido: dataUser.apellido,
+      email: dataUser.email,
+      password: password,
+      typeUser: "CLIENTE",
+    },
+    select: {
+      id: true,
+      nombre: true,
+      apellido: true,
+      email: true,
+      typeUser: true,
+    },
+  });
+  return res.json({
+    message: 'Usuario registrado exitosamente',
+    data: newClient,
   });
 };
 
@@ -53,6 +87,8 @@ export const loginUser = async (req, res) => {
       message: `Bienvenido ${userFinded.nombre} ${userFinded.apellido}.`,
       message1: userFinded.email,
       content: token,
+      typeUser: userFinded.typeUser,
+
     });
   } else {
     return res.status(403).json({

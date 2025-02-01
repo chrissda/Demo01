@@ -7,16 +7,6 @@ import NavbarN from "./components/NavbarN";
 import LoginN from "./Views/LoginN";
 import RegisterN from "./Views/RegisterN";
 import AdminView from "./Views/AdminView";
-import { Navigate } from "react-router-dom";
-
-// const PrivateRoute = ({ children }) => {
-//   const token = localStorage.getItem("token")
-//   if (!token) {
-//     return <Navigate to="/login" replace />; // Redirige a login si no hay token
-//   }
-
-//   return children; // Si hay token, muestra la vista protegida
-// };
 
 const App = () => {
 
@@ -33,7 +23,6 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<LoginN />} />
           <Route path="/register" element={<RegisterN />} />
-          {/* <Route path="/admin" element={<PrivateRoute> <AdminView /> </PrivateRoute>} /> */}
           <Route path="/admin" element={<AdminView />} />
         </Routes>
       </Router>

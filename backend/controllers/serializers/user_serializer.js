@@ -18,6 +18,11 @@ export const regUserSerializer = z.object({
 export const loginUserSerializer = z.object({
   email: z.string().email(),
   password: z.string(),
+  // typeUser: z.enum([
+  //   TYPE_USER.ADMIN,
+  //   TYPE_USER.CLIENTE,
+  //   TYPE_USER.MODERADOR,
+  // ]),
 });
 
 export const updateUserSerializer = z.object({

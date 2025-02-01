@@ -1,4 +1,3 @@
-import { all } from "axios";
 import { connection } from "../connection.js";
 import { 
     createProductSerializer,
@@ -101,39 +100,69 @@ export const viewBrand = async (req, res) => {
 
 // ELIMINAR PRODUCTOS, CATEGORIAS Y MARCAS
 export const deleteProductIDorName = async (req, res) => {
-  try{
-    // Obtengo los datos para buscar el producto
-    const { id, nombre } = req.body;
-    // const productFinded = await connection.producto.findUnique({ where: {id : parseInt(id)} });
-    let productFinded;
-    if(id) {
-      productFinded = await connection.producto.findUnique({ where : {id: parseInt(id)} });
-    } else if (nombre) {
-      productFinded = await connection.producto.findUnique({ where : nombre });
-    } else {
+  try {
+    // Obtengo el ID para buscar el producto
+    const { id } = req.params;
+    if (!id) {
       return res.status(400).json({
-        message: "Se requiere el id o el nombre del producto."
+        message: "Se requiere ID para eliminar.",
       });
     }
-    // Si el producto existe
-    if(!productFinded) {
+    // Hago la busqueda en la BD
+    const productFinded = await connection.producto.findUnique({
+      where: { id: parseInt(id) },
+    });
+    if (!productFinded) {
       return res.status(400).json({
         message: "Producto no encontrado o no existe en la BD.",
       });
     }
-    // Procedo a eliminar el producto
-    await connection.producto.delete({ where : {id:productFinded.id} });
+    // Procedor a eliminar el producto
+    await connection.producto.delete({  where: { id: productFinded.id } });
     return res.json({
-      message: "Producto eliminado de la BD."
+      message: "Producto eliminado de la BD.",
     });
   } catch (error) {
-    // Aqui valido en caso ocurra un error al eliminar
     console.error(error);
     return res.status(500).json({
-      message: "Error de conexion, no se pudo eliminar el producto.",
+      message: "Error de conexión, no se pudo eliminar el producto.",
     });
   }
 };
+// export const deleteProductIDorName = async (req, res) => {
+//   try{
+//     // Obtengo los datos para buscar el producto
+//     const { id, nombre } = req.body;
+//     // const productFinded = await connection.producto.findUnique({ where: {id : parseInt(id)} });
+//     let productFinded;
+//     if(id) {
+//       productFinded = await connection.producto.findUnique({ where : {id: parseInt(id)} });
+//     } else if (nombre) {
+//       productFinded = await connection.producto.findUnique({ where : nombre });
+//     } else {
+//       return res.status(400).json({
+//         message: "Se requiere el id o el nombre del producto."
+//       });
+//     }
+//     // Si el producto existe
+//     if(!productFinded) {
+//       return res.status(400).json({
+//         message: "Producto no encontrado o no existe en la BD.",
+//       });
+//     }
+//     // Procedo a eliminar el producto
+//     await connection.producto.delete({ where : {id:productFinded.id} });
+//     return res.json({
+//       message: "Producto eliminado de la BD."
+//     });
+//   } catch (error) {
+//     // Aqui valido en caso ocurra un error al eliminar
+//     console.error(error);
+//     return res.status(500).json({
+//       message: "Error de conexion, no se pudo eliminar el producto.",
+//     });
+//   }
+// };
 
 export const deleteProduct = async (req, res) => {
   try {
@@ -259,4 +288,25 @@ export const updateBrand = async (req, res) => {
     message: "Marca actualizada correctamente.",
     content: brandUpdate,
   });
+};
+
+
+// OBTENER LOS PRODUCTOS PARA MOSTRARLOS EN EL FRONT
+export const viewProductsFront = async (req, res) => {
+  try {
+    const allProducts = await connection.producto.findMany({
+      include : {
+        marca: { select : { nombre : true} },
+        categoria: { select: {nombre : true}},
+      }
+    });
+    return res.json({
+      message: "Productos de la BD.",
+      content: allProducts,
+    });
+  } catch {
+    return res.status(500).json({
+      message: "Error de conexión, No se puede mostrar los productos."
+    });
+  }
 };

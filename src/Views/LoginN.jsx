@@ -1,4 +1,3 @@
-import { TYPE_USER } from "@prisma/client";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +15,6 @@ const LoginN = () => {
         body: JSON.stringify({
           email,
           password,
-          TYPE_USER,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -24,20 +22,19 @@ const LoginN = () => {
       })
       if(response.ok) {
         const data = await response.json();
+        console.log("Datos recibidos del backend:", data);
         alert(`${data.message} \n${data.message1}`);
         alert(data.content); // Token pero no lo se va a mostrar
-        // localStorage.setItem("token", data.content);
-        navigate("/admin"); // Me dirigira a mi vista AdminView
-      } else {
-        const errorData = await response.json();
-        alert(errorData.message);
-      }
-    }
-    catch(error) {
+        navigate("/admin");
+      };
+    } catch (error) {
       console.error("Error en la conexión", error);
       alert("Hubo un error al intentar conectarse con el servidor.");
     }
   };
+
+  
+
   return (
     <>
       <section className="bg-indigo-900 dark:bg-gray-900 h-screen" id="loginN">

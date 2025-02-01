@@ -11,7 +11,8 @@ import {
   updateCategory,
   updateBrand,
   deleteBrand,
-  deleteCategory} from "../controllers/product_controller.js";
+  deleteCategory,
+  viewProductsFront} from "../controllers/product_controller.js";
 import asyncHandler from "express-async-handler";
 import {
   searchBrand,
@@ -26,13 +27,14 @@ productRouter.post("/crear-marca", asyncHandler(createBrand));
 productRouter.post("/crear-producto", asyncHandler(createProduct));
 productRouter.get("/productos/", asyncHandler(viewProducts));
 productRouter.get("/categorias", asyncHandler(viewCategory));
+productRouter.get("/marcas", asyncHandler(viewBrand));
 productRouter.get("/productos/:id", asyncHandler(searchProduct));
 productRouter.get("/categorias/:id", asyncHandler(searchCategory));
 productRouter.get("/marcas/:id", asyncHandler(searchBrand));
-productRouter.get("/marcas", asyncHandler(viewBrand));
 productRouter.put("/actualizar-producto", asyncHandler(updateProduct));
 productRouter.put("/actualizar-categoria", asyncHandler(updateCategory));
 productRouter.put("/actualizar-marca", asyncHandler(updateBrand));
 productRouter.delete("/eliminar-producto/:id", asyncHandler(deleteProductIDorName));
 productRouter.delete("/eliminar-marca/:id", asyncHandler(deleteBrand));
 productRouter.delete("/eliminar-categoria/:id", asyncHandler(deleteCategory));
+productRouter.get("/listar-productos", asyncHandler(viewProductsFront));
